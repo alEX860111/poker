@@ -6,11 +6,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateCard(t *testing.T) {
+func TestCreateCardHeartTwo(t *testing.T) {
 	assert := assert.New(t)
 	card, err := CreateCard("2H")
 	assert.Equal(2, card.getValue())
 	assert.Equal("H", card.getSuit())
+	assert.Nil(err)
+}
+
+func TestCreateCardClubAce(t *testing.T) {
+	assert := assert.New(t)
+	card, err := CreateCard("AC")
+	assert.Equal(14, card.getValue())
+	assert.Equal("C", card.getSuit())
 	assert.Nil(err)
 }
 

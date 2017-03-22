@@ -36,15 +36,15 @@ func CreateCard(s string) (c Card, err error) {
 	}
 
 	value := string(s[0])
-	index := strings.Index(allowedValues, value)
-	if index == -1 {
+	valueAsInt := strings.Index(allowedValues, value) + 2
+	if valueAsInt < 2 || valueAsInt > 14 {
 		return c, fmt.Errorf("invalid card value: expected one of %q, got %s", allowedValues, value)
 	}
-	valueAsInt := index + 2
 
 	suit := string(s[1])
 	if !strings.Contains(allowedSuits, suit) {
 		return c, fmt.Errorf("invalid card suit: expected one of %q, got %s", allowedSuits, suit)
 	}
+
 	return card{valueAsInt, suit}, nil
 }
