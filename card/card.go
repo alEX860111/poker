@@ -6,36 +6,45 @@ import (
 )
 
 // Card a card in a poker game
-type Card struct {
-	Value int
-	Suit  string
+type Card interface {
+	getValue() int
+	getSuit() string
 }
+
+type card struct {
+	value int
+	suit  string
+}
+
+func (card card) getValue() int {
+	return card.value
+}
+
+func (card card) getSuit() string {
+	return card.suit
+}
+
+const allowedValues = "23456789TJQKA"
+
+const allowedSuits = "CDHS"
 
 // CreateCard creates a new card
-func CreateCard(s string) (c *Card, err error) {
-	if len(s) != 2 {
-		return c, fmt.Errorf("invalid card: %s", s)
+func CreateCard(s string) (c Card, err error) {
+	length := len(s)
+	if length != 2 {
+		return c, fmt.Errorf("invalid card length: expected 2, got %d", length)
 	}
-	value := string(s[0])
-	valueAsInt, err := convertValueToInt(value)
-	if err != nil {
-		return c, err
-	}
-	suit := string(s[1])
-	if !strings.Contains("CDHS", suit) {
-		return c, fmt.Errorf("invalid card suit: %s", suit)
-	}
-	return &Card{valueAsInt, suit}, nil
-}
 
-func convertValueToInt(value string) (int, error) {
-	if len(value) != 1 {
-		return -1, fmt.Errorf("invalid card value: %s", value)
-	}
-	values := "23456789TJQKA"
-	index := strings.Index(values, value)
+	value := string(s[0])
+	index := strings.Index(allowedValues, value)
 	if index == -1 {
-		return -1, fmt.Errorf("invalid card value: %s", value)
+		return c, fmt.Errorf("invalid card value: expected one of %q, got %s", allowedValues, value)
 	}
-	return index + 2, nil
+	valueAsInt := index + 2
+
+	suit := string(s[1])
+	if !strings.Contains(allowedSuits, suit) {
+		return c, fmt.Errorf("invalid card suit: expected one of %q, got %s", allowedSuits, suit)
+	}
+	return card{valueAsInt, suit}, nil
 }
