@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"./card"
+	"github.com/alEX860111/poker/card"
 )
 
 func main() {
