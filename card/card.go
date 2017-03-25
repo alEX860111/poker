@@ -6,22 +6,9 @@ import (
 )
 
 // Card a card in a poker game
-type Card interface {
-	getValue() int
-	getSuit() string
-}
-
-type card struct {
-	value int
-	suit  string
-}
-
-func (card card) getValue() int {
-	return card.value
-}
-
-func (card card) getSuit() string {
-	return card.suit
+type Card struct {
+	Value int
+	Suit  string
 }
 
 const allowedValues = "23456789TJQKA"
@@ -46,5 +33,5 @@ func CreateCard(s string) (c Card, err error) {
 		return c, fmt.Errorf("invalid card suit: expected one of %q, got %s", allowedSuits, suit)
 	}
 
-	return card{valueAsInt, suit}, nil
+	return Card{valueAsInt, suit}, nil
 }
