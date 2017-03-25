@@ -11,16 +11,11 @@ type Card struct {
 	Suit  string
 }
 
-// Hand A poker hand consists of 5 cards
-type Hand struct {
-}
-
 const allowedValues = "23456789TJQKA"
 
 const allowedSuits = "CDHS"
 
-// CreateCard creates a new card
-func CreateCard(s string) (c Card, err error) {
+func createCard(s string) (c Card, err error) {
 	length := len(s)
 	if length != 2 {
 		return c, fmt.Errorf("invalid card length: expected 2, got %d", length)

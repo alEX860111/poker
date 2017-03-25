@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/alEX860111/poker/card"
+	"github.com/alEX860111/poker/poker"
 )
 
 func main() {
-	card, err := card.CreateCard("TS")
-	fmt.Println(card.Value)
+	hand, err := poker.CreateHand("2H 3C JS 2S AD")
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Printf("%+v\n", card)
+	fmt.Printf("%+v\n", hand)
 }
