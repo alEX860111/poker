@@ -10,6 +10,8 @@ type Hand struct {
 	cards [5]Card
 }
 
+var _validateCards = validateCards
+
 // CreateHand creates a new hand
 func CreateHand(s string) (h Hand, err error) {
 	cardStrings := strings.Split(s, " ")
@@ -25,7 +27,7 @@ func CreateHand(s string) (h Hand, err error) {
 		cards[i] = card
 	}
 
-	_, err = validateCards(cards[:])
+	_, err = _validateCards(cards[:])
 	if err != nil {
 		return h, err
 	}
