@@ -1,14 +1,18 @@
-package card
+package poker
 
 import (
 	"fmt"
 	"strings"
 )
 
-// Card a card in a poker game
+// Card A card in a poker game has a suit and a value
 type Card struct {
 	Value int
 	Suit  string
+}
+
+// Hand A poker hand consists of 5 cards
+type Hand struct {
 }
 
 const allowedValues = "23456789TJQKA"
